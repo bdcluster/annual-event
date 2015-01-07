@@ -15,7 +15,7 @@
         <td ng-bind="info.level"></td>
         <td ng-bind="info.info"></td>
         <td ng-bind="info.limit"></td>                
-        <td><a href="lottery-start.html" class="btn btn-primary btn-sm">开始抽奖</a></td>
+        <td><a href="#/goodLuck" class="btn btn-primary btn-sm" data-id="{{info.id}}" data-index="{{$index}}" ng-click="currentLevel($index)">开始抽奖</a></td>
       </tr>
     </tbody>
   </table>

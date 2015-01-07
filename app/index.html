@@ -17,7 +17,7 @@
     <![endif]-->
   </head>
   <body>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" ng-hide="hideNav">
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="#/">BDC</a>
@@ -25,9 +25,10 @@
         <ul class="nav navbar-nav">
           <li ng-repeat="menu in menus" ng-class="{active: isActivedMenu('/'+menu.path)}"><a href="#/{{menu.path}}" ng-bind="menu.name"></a></li>
         </ul>
+        <button class="btn btn-default navbar-btn pull-right" ng-show="isGoodLuckPage()" ng-bind="levelAction" ng-click="getLuck()"></button>
       </div>
     </nav>
-    <section class="container">
+    <section ng-class="{'container':!isGoodLuckPage(), 'container-fluid':isGoodLuckPage()}">
       <main class="row">
         <div class="col-xs-12">
           <div data-ng-view></div>
@@ -50,6 +51,7 @@
     <script src="js/templates.js"></script>
     <script src="views/desktop/home.js"></script>
     <script src="views/desktop/lottery.js"></script>
+    <script src="views/desktop/good_luck.js"></script>
 
     <!-- endbuild -->
   </body>

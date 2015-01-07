@@ -25,6 +25,10 @@
         templateUrl: viewPath + '/desktop/lottery.html',
         controller:  'LotteryController'
       })
+      .when('/goodLuck', {
+        templateUrl: viewPath + '/desktop/good_luck.html',
+        controller:  'GoodLuckController'
+      })
       .otherwise({redirectTo: '/home'});
 
     $httpProvider.defaults.transformRequest = function(obj){

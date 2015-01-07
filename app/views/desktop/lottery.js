@@ -1,13 +1,15 @@
 (function(){
   'use strict';
   angular.module('LotteryModule', []).controller('LotteryController', [
-    '$rootScope','$scope','$location', 'AMS', 'C', function(
-     $rootScope,  $scope,  $location,   AMS,   C){
-    
-    AMS.get({endpoint: 'lottery'}, function(r){
-      $scope.lotteryInfo = r.data;
-      console.log($scope.lotteryInfo)
-    });
-    
+    '$rootScope', '$scope','$location', 'C', function(
+     $rootScope,   $scope,  $location,   C){
+
+    var storage = C.storage();
+
+    $rootScope.hideNav = false;
+    $scope.lotteryInfo = storage.get('lottery');
+    $scope.currentLevel=function(level){
+      storage.set('level', level);
+    };
   }]);
 })();
