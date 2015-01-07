@@ -1,0 +1,56 @@
+<!doctype html>
+<html xmlns:ng="http://angularjs.org" id="ng-app" data-ng-app="AmsApp" data-ng-controller="GlobelController">
+  <head>
+    <title data-ng-bind="title"></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- build:css css/docs.css -->
+    <link rel="stylesheet" href="./css/docs.css">
+    <!-- endbuild -->
+
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#/">BDC</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li ng-repeat="menu in menus" ng-class="{active: isActivedMenu('/'+menu.path)}"><a href="#/{{menu.path}}" ng-bind="menu.name"></a></li>
+        </ul>
+      </div>
+    </nav>
+    <section class="container">
+      <main class="row">
+        <div class="col-xs-12">
+          <div data-ng-view></div>
+        </div>
+      </main>
+    </section>
+    <!-- build:js js/docs.js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>  
+    <script src="js/app.js"></script>
+    <script src="js/filters.js"></script>    
+    <script src="js/services.js"></script>
+    <script src="js/resources.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="views/desktop/home.js"></script>
+    <script src="views/desktop/lottery.js"></script>
+
+    <!-- endbuild -->
+  </body>
+</html>
