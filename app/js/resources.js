@@ -9,10 +9,7 @@
     angular.extend(normalPrarms, {local:1, mock:1, enforce:1, chaos:Math.random()});
 
     return $resource(url, normalPrarms, {
-      delUser:{
-        method:'POST',
-        params:{endpoint:'user', action:'delete', id:'@id'}
-      }
+      
     });
   }]);
 })();
