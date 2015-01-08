@@ -29,6 +29,18 @@
         templateUrl: viewPath + '/desktop/good_luck.html',
         controller:  'GoodLuckController'
       })
+      .when('/awards', {
+        templateUrl: viewPath + '/desktop/awards.html',
+        controller:  'AwardsController'
+      })
+      .when('/group', {
+        templateUrl: viewPath + '/desktop/group.html',
+        controller:  'GroupController'
+      })
+      .when('/final', {
+        templateUrl: viewPath + '/desktop/final.html',
+        controller:  'FinalController'
+      })
       .otherwise({redirectTo: '/home'});
 
     $httpProvider.defaults.transformRequest = function(obj){

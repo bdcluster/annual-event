@@ -23,6 +23,9 @@
           },
           clear: function(){
             return store.clearAll();
+          },
+          bind: function(scope, property){
+            return store.bind(scope, property);
           }
         };
       }

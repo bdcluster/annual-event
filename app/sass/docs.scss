@@ -11,28 +11,32 @@ $d: 40px;
   text-align:center;
   line-height: $d;
   margin:0 5px 5px 0;
+  &.lucky-man{
+    @include animation(blink .25s linear 5 reverse forwards);
+    @include transform(scale(10));
+    position: absolute;
+    top: 50%; left:50%;
+    margin-top: -$d / 2;
+    margin-left: -$d / 2;
+  }
 }
 
 .zoomIn{
   @include transform(scale(2));
 }
 
-.lucky-man{
-  @include animation(blink .5s linear 5 reverse forwards);
-  @include transform(scale(10));
-  position: absolute;
-  top: 50%; left:50%;
-  margin-top: -$d/2;
-  margin-left: -$d/2;
-}
 
 @include keyframes(blink){
   from{
-    background: red;
+    background: rgba(255,0,0,.8);
     color: white;
   }
   to{
-    background:white;
+    background:rgba(255,255,255,.8);
     color:red;
   }
+}
+
+.vote-progress{
+  @include transition(all .5s ease);
 }

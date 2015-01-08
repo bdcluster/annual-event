@@ -1,7 +1,7 @@
 (function(){
   'use strict';
   angular.module('AmsControllers', [
-    'HomeModule', 'LotteryModule', 'GoodLuckModule'
+    'HomeModule', 'LotteryModule', 'GoodLuckModule', 'AwardsModule', 'GroupModule', "FinalModule"
   ])
   .controller('GlobelController', [
     '$rootScope','$window','$location','AMS','C',function(
@@ -10,7 +10,7 @@
     $rootScope.title = '中晴集团年会';
     $rootScope.hideNav = true;
     $rootScope.menus = [
-      {name: '投票有理', path: 'vote'},
+      {name: '投票有理', path: 'group'},
       {name: '抽奖万岁', path: 'lottery'},
       {name: '中奖红榜', path: 'awards'}
     ]

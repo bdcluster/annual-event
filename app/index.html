@@ -25,7 +25,11 @@
         <ul class="nav navbar-nav">
           <li ng-repeat="menu in menus" ng-class="{active: isActivedMenu('/'+menu.path)}"><a href="#/{{menu.path}}" ng-bind="menu.name"></a></li>
         </ul>
-        <button class="btn btn-default navbar-btn pull-right" ng-show="isGoodLuckPage()" ng-bind="levelAction" ng-click="getLuck()"></button>
+        <div class="pull-right" ng-show="isGoodLuckPage()">
+          <button class="btn btn-default navbar-btn" ng-bind="levelAction" ng-click="getLuck()" ng-class="{disabled: disableLottery}"></button>
+          
+          <button class="btn btn-default" ng-click="cancelLucky()">取消本次抽奖</button>
+        </div>
       </div>
     </nav>
     <section ng-class="{'container':!isGoodLuckPage(), 'container-fluid':isGoodLuckPage()}">
@@ -52,7 +56,9 @@
     <script src="views/desktop/home.js"></script>
     <script src="views/desktop/lottery.js"></script>
     <script src="views/desktop/good_luck.js"></script>
-
+    <script src="views/desktop/awards.js"></script>
+    <script src="views/desktop/group.js"></script>
+    <script src="views/desktop/final.js"></script>
     <!-- endbuild -->
   </body>
 </html>

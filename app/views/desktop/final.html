@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+  <div class="panel-heading">票选情况</div>
+  <table class="table">
+    <thead>
+      <tr>
+        <td style="width:10%">节目</td>
+        <td>投票情况</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="vote in votes">
+        <td ng-bind="vote.name"></td>
+        <td>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped active vote-progress" style="width:{{vote.count}}%">
+              {{vote.count}}%
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

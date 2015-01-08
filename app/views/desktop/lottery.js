@@ -11,5 +11,8 @@
     $scope.currentLevel=function(level){
       storage.set('level', level);
     };
+    $scope.noLottery = function(index){
+      return storage.get('invalidLottery').indexOf(index)!==-1;
+    }
   }]);
 })();
