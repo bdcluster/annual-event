@@ -3,21 +3,21 @@
   var viewPath = "/mobile";
   angular.module('AmsMobiApp', [
     'ngRoute',
+    'ngTouch',
     'ngResource',
-    'AmsControllers',
+    'AmsServices',
     'AmsResources',
-    'AmsServices'
+    'AmsMobiControllers'
   ])
   .config(['$routeProvider','$httpProvider', function($routeProvider, $httpProvider){
 
     $routeProvider
       .when('/home', {
-        templateUrl: viewPath + '/home.html',
-        controller:  'HomeController'
+        templateUrl: viewPath + '/home.html'
       })
-      .when('/lottery', {
-        templateUrl: viewPath + '/binding.html',
-        controller:  'BindingController'
+      .when('/vote', {
+        templateUrl: viewPath + '/vote.html',
+        controller:  'VoteController'
       })
       .when('/goodLuck', {
         templateUrl: viewPath + '/vote.html',

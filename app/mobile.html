@@ -5,19 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title ng-bind="title"></title>
   <!-- build:css css/mobile.css -->
+  <link rel="stylesheet" href="./bower_components/ratchet/dist/css/ratchet.min.css">
   <link rel="stylesheet" href="./css/mobile.css">
   <!-- endbuild -->
 </head>
 <body>
-
-    <!-- build:js js/mobi.js -->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="js/app-mobi.js"></script>
-    <script src="js/controllers-mobi.js"></script>
-    <script src="js/services.js"></script>
-    <script src="js/resources.js"></script>
-    <!-- endbuild -->
+  <div class="wrap" ng-view></div>
+  <!-- build:js js/mobi.js -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.min.js"></script>
+  <script src="js/app-mobi.js"></script>
+  <script src="js/controllers-mobi.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/resources.js"></script>
+  <!-- endbuild -->
 </body>
 </html>

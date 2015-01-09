@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  angular.module('AmsControllers', [])
+  angular.module('AmsMobiControllers', [])
   .controller('GlobelController', [
     '$rootScope','$window','$location','AMS',function(
      $rootScope,  $window,  $location,  AMS){
