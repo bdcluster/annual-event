@@ -14,8 +14,8 @@
       <tr ng-repeat="info in lotteryInfo">
         <td ng-bind="info.level"></td>
         <td ng-bind="info.info"></td>
-        <td ng-bind="info.limit"></td>                
-        <td><a href="#/goodLuck" class="btn btn-primary btn-sm" data-id="{{info.id}}" data-index="{{$index}}" ng-click="currentLevel($index)" ng-class="{'btn-primary':!noLottery($index), 'disabled':noLottery($index)}">开始抽奖</a></td>
+        <td><span ng-bind="info.amount"></span> / <span ng-bind="info.limit"></span></td>                
+        <td><a href="#/goodLuck" class="btn btn-primary btn-sm" data-id="{{info.id}}" data-index="{{$index}}" ng-click="currentLevel(info.id, info.level)" ng-class="{'btn-primary':info.amount<info.limit, 'disabled':info.amount>=info.limit}">开始抽奖</a></td>
       </tr>
     </tbody>
   </table>

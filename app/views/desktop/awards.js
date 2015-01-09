@@ -7,7 +7,7 @@
     var storage = C.storage();
 
     $rootScope.hideNav = false;
-    AMS.get({endpoint:'lucklist'}, function(req){
+    AMS.get({endpoint:'luckylist'}, function(req){
       $scope.awards = req.data;
     });
 

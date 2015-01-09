@@ -3,9 +3,7 @@
   var viewPath = "/views";
   angular.module('AmsApp', [
     'ngRoute',
-    'ngLocale',
     'ngResource',
-    'ui.bootstrap',
     'LocalStorageModule',
     'AmsControllers',
     'AmsDirectives',

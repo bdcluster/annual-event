@@ -111,7 +111,7 @@
   //| ✓ concat & minify all template to a js file
   //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   gulp.task('tmpl2js', function() {
-    return gulp.src([_.view + '/**/*.html'])
+    return gulp.src([_.view + '/desktop/**/*.html'])
       .pipe($.plumber())
       .pipe($.minifyHtml({
         empty: true,
@@ -199,7 +199,7 @@
 
     // Watch template files
     $.watch({
-      glob: [_.view + '/**/*.html']
+      glob: [_.view + '/desktop/**/*.html']
     }, function() {
       gulp.start('tmpl2js');
     });

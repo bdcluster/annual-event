@@ -10,7 +10,7 @@
     </thead>
     <tbody>
       <tr ng-repeat="info in awards">
-        <td ng-bind="info.grade"></td>
+        <td ng-bind="info.level"></td>
         <td>
           <ul class="list-inline">
             <li ng-repeat="person in info.list track by $index" ng-bind="person"></li>

@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-  <div class="panel-heading">票选情况</div>
+  <div class="panel-heading">票选情况（总计 <span ng-bind="totalVotes" class="text-primary">0</span> 票）</div>
   <table class="table">
     <thead>
       <tr>
@@ -12,8 +12,8 @@
         <td ng-bind="vote.name"></td>
         <td>
           <div class="progress">
-            <div class="progress-bar progress-bar-striped active vote-progress" style="width:{{vote.count}}%">
-              {{vote.count}}%
+            <div class="progress-bar progress-bar-striped active vote-progress" style="width:{{vote.count*80/topCount}}%">
+              {{vote.count}} 票
             </div>
           </div>
         </td>

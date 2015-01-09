@@ -6,15 +6,15 @@
 
     $rootScope.hideNav = false;
     
-    AMS.get({endpoint: 'final', chaos: Math.random()}, function(req){
-      $scope.votes = req.data;
-    });
-
-    $interval(function(){
-      AMS.get({endpoint: 'final', chaos: Math.random()}, function(req){
-        $scope.votes = req.data;
+    var statistic = function(){
+      AMS.get({endpoint: 'statistic', chaos: Math.random()}, function(req){
+        $scope.votes = req.data.programs;
+        $scope.totalVotes = req.data.total;
+        $scope.topCount = $scope.votes[0].count;
       });
-    },5000)
+    };
+    statistic();
+    $interval(statistic,2000);
 
   }]);
 })();
