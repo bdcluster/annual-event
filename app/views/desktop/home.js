@@ -6,7 +6,7 @@
     
     var storage = C.storage(), s;
 
-    $rootScope.hideNav = true;
+    $rootScope.showBg = true;
     $scope.eventInit = function(){
       storage.clear();
 
@@ -18,13 +18,14 @@
 
       var staff = AMS.get({endpoint: 'staff'}, function(req){
         storage.set('staff', req.data);
+        $location.path('/portal');
       }, function(){
         console.log('未能获取人员数据！')
       });
 
       $q.all([start.$promise, staff.$promise]).then(function(){
         if(s === true){
-          $location.path('/lottery');
+          $location.path('/portal');
         } 
       });
     };  

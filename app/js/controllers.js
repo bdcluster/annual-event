@@ -1,12 +1,13 @@
 (function(){
   'use strict';
   angular.module('AmsControllers', [
-    'HomeModule', 'LotteryModule', 'GoodLuckModule', 'AwardsModule', 'GroupModule', "FinalModule"
+    'HomeModule', 'PortalModule', 'LotteryModule', 'GoodLuckModule', 'AwardsModule', 'GroupModule', "FinalModule"
   ])
   .controller('GlobelController', [
     '$rootScope','$window','$location','AMS','C',function(
      $rootScope,  $window,  $location,  AMS,  C){
 
+    $rootScope.wild = true;
     $rootScope.title = '中晴集团年会';
     $rootScope.hideNav = true;
     $rootScope.menus = [

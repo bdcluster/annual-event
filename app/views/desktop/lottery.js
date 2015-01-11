@@ -6,7 +6,8 @@
 
     var storage = C.storage();
 
-    $rootScope.hideNav = false;
+    $rootScope.wild = false;
+    $rootScope.showBg = false;
 
     AMS.get({endpoint: 'lottery'}, function(req){
       $scope.lotteryInfo = req.data;

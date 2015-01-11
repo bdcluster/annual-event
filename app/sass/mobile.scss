@@ -1,5 +1,37 @@
+@import "compass";
+/* animate.css base sass import */
+// Grab the settings
+$enable-prefixes:         true;
+$enable-all-modules:      true;
+
+@import 'settings/main',
+        'settings/names';
+
+// Import base animation classes
+@import 'utilities/base-classes';
+
+// Import Utilities
+@import 'utilities/functions',
+        'utilities/mixins',
+        'animations/bouncing-entrances/bounce-in-left',
+        'animations/bouncing-entrances/bounce-in-right',
+        'animations/rotating-entrances/rotate-in';        
+
+
 @mixin box($w, $h){
   width:$w; height:$h;
+}
+$vote-nav-height: 118px * 0.5;
+
+.btn-vote{
+  display: block;
+  margin:0 auto;
+  padding:0 20px;
+  background-color:#a80d18;
+  @include border-radius(10px, 5px);
+  line-height: 42px;
+  color: white;
+  text-align:center;
 }
 
 .wrap{
@@ -26,16 +58,73 @@
 }
 
 .go-vote{
-  display: block;
-  @include box(276px/2, 90px/2);
-  background:url(../img/btn-go-vote.png) no-repeat;
-  background-size: contain;
-  text-indent: -99999px;
   position: absolute;
-  margin-left:- 276px/4;
+  margin-left: -54px;
   left:50%; bottom: 80px;
 }
 
 .content{
   @include box(100%, 100%);
+}
+
+.bar {
+  height: $vote-nav-height;
+  .icon{
+    line-height:$vote-nav-height - 20;
+    color: #a80d18;
+    font-size: 0.8em;
+  }
+  h1{
+    line-height:$vote-nav-height;    
+  }
+}
+
+.bar-nav~.vote-content{
+  padding-top:$vote-nav-height;
+  @include background-image(radial-gradient((790px/2-790+609)/2 790px * 0.25, circle closest-corner, #7a0000, black));
+}
+
+.program{
+  @include box(350px/2, 350px/2);
+  @include box-sizing(border-box);
+  border:2px solid white;
+  margin: 20px auto;
+  background:white url(http://i9.download.fd.pchome.net/t_960x600/g1/M00/0B/02/ooYBAFQFyN-IT7ZoAAjnUO5pMBIAAB5bwA65pYACOdo054.jpg) no-repeat center center;
+  background-size: cover;
+  p{
+    width: 80%;
+    line-height:26px;
+    position: relative;
+    top:75%;
+    color: white;
+    padding-left: 10px;
+    background-color: rgba(0,0,0,.8);
+  }
+  &.vote-it{
+    border-color:#4fc1e9;
+  }
+}
+
+.program-vote{
+  width: (350px/2);
+  margin:20px auto;
+}
+
+.no-vote-group{
+  font-size: 1.2em;
+  color:white;
+  padding:20px;
+  text-align:center;
+}
+
+.pk{
+  @include box(275px/2, 231px/2);
+  @include animation-delay(.5s);
+  @include animation-duration(.5s);
+  background:url(../img/pk.png) no-repeat;
+  background-size:cover;
+  position: absolute;
+  top: 220px;
+  left: 50%;
+  margin-left: -(275px/4);
 }

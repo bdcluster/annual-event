@@ -19,6 +19,10 @@
         templateUrl: viewPath + '/desktop/home.html',
         controller:  'HomeController'
       })
+      .when('/portal', {
+        templateUrl: viewPath + '/desktop/portal.html',
+        controller:  'PortalController'
+      })
       .when('/lottery', {
         templateUrl: viewPath + '/desktop/lottery.html',
         controller:  'LotteryController'

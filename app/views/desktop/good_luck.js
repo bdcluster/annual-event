@@ -4,6 +4,8 @@
     '$rootScope', '$scope','$location', 'AMS', 'C', '$interval', function(
      $rootScope,   $scope,  $location,   AMS,   C,   $interval){
 
+    $rootScope.wild = true;
+    $rootScope.showBg = false;
     var storage = C.storage(), index;
     var staff = storage.get('staff');
     var curLottery = storage.get('curLottery');
