@@ -9,6 +9,6 @@
   <div class="program animated" ng-repeat="a in against" style="background-image:url({{a.img}})" ng-click="chooseIt(a.id)" ng-class="{'vote-it':programId==a.id, 'bounce-in-left': $index % 2 == 0, 'bounce-in-right': $index % 2 !=0}">
     <p ng-bind="a.name"></p>
   </div>
-  <div class="pk animated rotate-in"></div>
+  <div class="pk animated rotate-in" ng-show="showPK"></div>
   <a href="#" class="btn-vote program-vote" ng-show="!noVoteGroup &amp;&amp; enableVote" ng-class="{disabled:programId<0}" ng-click="voteIt($event)">就投它了</a>
 </div>

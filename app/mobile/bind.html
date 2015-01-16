@@ -1,0 +1,23 @@
+<div id="bindTitle"></div>
+<p class="text-tips">完成注册，即可参加年会抽奖活动<br>并在歌手大赛中为自己喜欢的好声音投票！</p>
+<form novalidate name="form" class="input-group">
+  <div class="input-row bio-row">
+    <label>头像</label>
+    <!-- <canvas width="65" height="65"></canvas> -->
+    <div class="upload-area">
+      <canvas width="65" height="65" id="myCanvas"></canvas>
+      <input id="imgFile" type="file" name="file">
+    </div>
+  </div>
+  <div class="input-row">
+    <label>姓名</label>
+    <input type="text" name="staffName" placeholder="请输入关键词后选择" ng-model="formdata.info" ng-keyup="formdata.show=true">
+    <div class="staff-list card" ng-show="form.staffName.$dirty &amp;&amp; formdata.info!='' &amp;&amp; formdata.show">
+      <ul class="table-view">
+        <li class="table-view-cell" ng-repeat="s in staff | filter: formdata.info" ng-click="formdata.info=s.name; formdata.id=s.id; formdata.show=false">
+          {{s.name}} - {{s.position}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</form>

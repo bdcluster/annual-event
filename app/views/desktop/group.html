@@ -1,5 +1,9 @@
 <div class="row">
-  <div class="col-xs-6" ng-repeat="g in group">
+  <img src="../img/voice-1.png" alt="voice" class="group-voice-1">
+  <img src="../img/voice-2.png" alt="voice" class="group-voice-2 animated bounce-in-up">
+</div>
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3 group" ng-repeat="g in group" ng-click="setActive($index)" ng-class="{active:getActive($index)}">
     <div class="panel" ng-class="{'panel-primary': g.status=='ON', 'panel-default': g.status=='OFF'}">
       <div class="panel-heading">
         <span ng-bind="g.name"></span>: 
@@ -15,10 +19,10 @@
             <p>&nbsp;</p>
             <p>&nbsp;</p>
             <p class="text-center" ng-if="g.status=='ON'">
-              <button class="btn btn-primary btn-lg" ng-click="vote(g.id, 'OFF')">结束投票</button>
+              <button class="btn btn-primary btn-lg" ng-click="vote(g.id, 'OFF', $index)">结束投票</button>
             </p>
             <p class="text-center" ng-if="g.status=='OFF'">
-              <button class="btn btn-default btn-lg" ng-click="vote(g.id, 'ON')">开始投票</button>
+              <button class="btn btn-default btn-lg" ng-click="vote(g.id, 'ON', $index)">开始投票</button>
             </p>
           </div>
           <div class="col-xs-4">
@@ -28,7 +32,8 @@
       </div>
     </div>
   </div>
-
+</div>
+<div class="row">
   <div class="col-xs-6 col-xs-offset-3">
     <p>
       <button class="btn btn-primary btn-block btn-lg" ng-click="goNextVote()">进入总决选</button>

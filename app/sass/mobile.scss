@@ -49,6 +49,14 @@ $vote-nav-height: 118px * 0.5;
   background-size: contain;
 }
 
+#bindTitle{
+  display: block;
+  margin: 0 auto;
+  @include box(576px/2, 100px); 
+  background:url(../img/title.png) no-repeat 0 (58px/2);
+  background-size: cover;
+}
+
 .invite-vote{
   width:100%;
   top:50%;
@@ -128,3 +136,48 @@ $vote-nav-height: 118px * 0.5;
   left: 50%;
   margin-left: -(275px/4);
 }
+
+.text-tips{
+  text-align:center;
+  font-weight: bold;
+  padding: 25px 0;
+}
+
+.bio-row{
+  $cell: 65px; 
+
+  height:$cell+16;
+  label{
+    line-height: $cell;
+  }
+  .upload-area{
+
+    position: relative;
+    float: left;
+    width: $cell; height: $cell;
+    margin: 8px 0;
+    background: #ccc;
+    canvas{
+      
+    }
+    input{
+      width: $cell; height: $cell;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+    }
+  }
+}
+.staff-list {
+  @include border-radius(0);
+  position: absolute;
+  top: 307px; width: 65%; right:0;
+  height:150px; overflow: auto;
+  .table-view-cell{
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}
+

@@ -1,11 +1,13 @@
 @import "vandor";
-$d: 40px;
+$d: 45px;
 
 html{
   width:100%; height:100%;
 }
 body{
+  height: 100%;
   background-color: #e9e8e4;
+  overflow-x: hidden;
 }
 .show-bg{
   height: 100%;
@@ -40,9 +42,19 @@ body{
     text-decoration:none;
   }
 }
+.btn-lottery{
+  padding: 0; margin:0;
+  width: 100%;
+  background-color: #0480ba;
+  line-height: 52px;
+  @include border-radius(10px, 5px);
+}
+
+.panel{
+  margin-top: 30px;
+}
 
 #luckList li{
-  @include border-radius(3px);
   @include transition(all .25s ease);
 
   width: $d; height: $d;
@@ -50,33 +62,124 @@ body{
   font-size:0.5em;
   text-align:center;
   line-height: $d;
-  margin:0 5px 5px 0;
-  &.lucky-man{
-    @include animation(blink .25s linear 5 reverse forwards);
-    @include transform(scale(10));
-    position: absolute;
-    top: 50%; left:50%;
-    margin-top: -$d / 2;
-    margin-left: -$d / 2;
+  &:nth-child(odd){
+    background-color: darken($gray-lighter, 5%);
   }
+}
+
+.lucky-man{
+  @include box-sizing(border-box);
+  // @include animation(blink .25s linear 5 forwards);
+  text-align:center;
+  padding: 10px;
+  width: 480px; height: 550px;
+  background: #efe5dd;
+  position: absolute;
+  top: 80px; left:50%;
+  margin-left: -(480px / 2);
+  img{
+    margin-bottom: 20px;
+  }
+  p{
+    font-size: 1.5em;
+    line-height: 26px;
+  }
+  button.btn-danger{
+    margin-left: -54px;
+  }
+}
+
+.crown{
+  @include size(240px, 198px);
+  position: absolute;
+  left: 50%; margin-left: -310px;
+  top: -75px;
 }
 
 .zoomIn{
   @include transform(scale(2));
+  @include box-shadow(0 0 2px 2px darken($gray-lighter, 15%));
 }
 
 
 @include keyframes(blink){
   from{
-    background: rgba(255,0,0,.8);
+    background: rgb(255,0,0);
     color: white;
   }
   to{
-    background:rgba(255,255,255,.8);
+    background:rgb(255,255,255);
     color:red;
+  }
+}
+
+.group-voice-1{
+  position: fixed;
+  top: 30px; left: 65px;
+}
+
+.group-voice-2{
+  position: fixed;
+  top: 210px; left: 40px;
+}
+
+.group{
+  @include transition(all .5s ease);
+  @include scale(0.5);
+  margin-bottom: -120px;
+  &:last-child{
+    margin-bottom: -50px;
+    &.active{
+      margin-bottom: 0;
+    }
+  }
+  &.active{
+    @include scale(1);
+    margin-bottom:-50px;
+    margin-top: 50px;
   }
 }
 
 .vote-progress{
   @include transition(all .5s ease);
 }
+
+aside{
+  width: 270px; height: 100%;
+  background: #fff7f0 url(../img/aside-bg.png) no-repeat 100% 132px;
+  position: fixed;
+  right:0; top:0;
+  @include box-shadow(0 0 5px 5px #ccc);
+  @include animation-duration(.5s);
+
+  button.close{
+    margin-left:10px;
+  }
+  .award-grade{
+    height: 160px; line-height:160px;
+    font-size:55px;
+    font-weight: bold;
+    padding: 0 42px;
+    color: #b01120;
+  }
+
+  .part2{
+    width: 190px;
+    position: absolute;
+    right: 35px; bottom: 0;
+  }
+
+  ul.list-unstyled{
+    margin-top: 75px;
+    text-align:center;
+    a{
+      color: #333333;
+      font-size: 30px;
+      line-height:48px;
+      &:hover{
+        text-decoration: none;
+      }
+    }
+  }
+}
+

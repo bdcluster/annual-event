@@ -19,9 +19,9 @@
         templateUrl: viewPath + '/vote.html',
         controller:  'VoteController'
       })
-      .when('/goodLuck', {
-        templateUrl: viewPath + '/vote.html',
-        controller:  'VoteController'
+      .when('/bind', {
+        templateUrl: viewPath + '/bind.html',
+        controller:  'BindController'
       })
       .otherwise({redirectTo: '/home'});
 

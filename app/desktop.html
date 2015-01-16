@@ -16,7 +16,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
     <![endif]-->
   </head>
-  <body ng-class="{'show-bg': showBg}">
+  <body ng-class="{'show-bg': showBg}" ng-mousemove="showSlide($event)" ng-click="hideSlide($event)">
     <!-- <nav class="navbar navbar-default" ng-hide="hideNav">
       <div class="container">
         <div class="navbar-header">
@@ -39,6 +39,16 @@
         </div>
       </main>
     </section>
+    <aside ng-show="!showBg" class="animated" ng-class="{'fade-in-right': slideIn, 'fade-out-right': !slideIn}">
+      <button type="button" class="close pull-left" ng-click="slideIn=false"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <p class="award-grade" ng-bind="levelAction" ng-show="isGoodLuckPage()"></p>
+      <div class="part2">
+        <button class="btn-zq btn-lottery" ng-show="isGoodLuckPage()" ng-click="getLuck(); slideIn=false" ng-disabled="disableLottery">开始抽奖</button>
+        <ul class="list-unstyled">
+          <li ng-repeat="menu in menus"><a ng-href="#/{{menu.path}}" ng-bind="menu.name"></a></li>
+        </ul>
+      </div>
+    </aside>
     <!-- build:js js/docs.js -->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>

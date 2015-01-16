@@ -11,30 +11,30 @@
     var curLottery = storage.get('curLottery');
 
     $rootScope.disableLottery = false;
-    $rootScope.hideNav = false;
-    $rootScope.levelAction = '抽取' + curLottery.level;
+    $rootScope.levelAction = curLottery.level;
     $rootScope.getLuck = function(){
-      var self = this, luckyMan, ifEdge;
+      var self = this, luckyIndex;
       self.disableLottery = true;
-      angular.element(document.querySelectorAll('.lucky-man')).removeClass('lucky-man');
+      $scope.showLucky = false;
+      //angular.element(document.querySelectorAll('.lucky-man')).removeClass('lucky-man');
       AMS.get({endpoint: 'lucky', id: curLottery.id}, function(res){
         if(res.success){
-          luckyMan = angular.element(document.querySelector('[data-id="'+res.data.id+'"]'));
+          luckyIndex = document.querySelector('[data-id="'+res.data.id+'"]').dataset['index'] - 0;
           
           $rootScope.cancelLucky=function(){
             AMS.get({endpoint: 'luckless', id:res.data.id}, function(){
-              luckyMan.removeClass('lucky-man');
+              //luckyMan.removeClass('lucky-man');
             });
           };
 
           $interval(function(){
             index = Math.ceil(Math.random() * staff.length) -1;
-            // console.log(index)
             angular.element(document.getElementById('luckList')).children().eq(index).addClass('zoomIn')
           }, 100, 50).then(function(){
             angular.element(document.querySelectorAll('.zoomIn')).removeClass('zoomIn');
-            console.log(luckyMan)
-            luckyMan.addClass('lucky-man');
+            $scope.luckyMan = $scope.staff[luckyIndex];
+            $scope.showLucky = true;
+            /*luckyMan.addClass('lucky-man');*/
             self.disableLottery = false;
           });
         } else {
@@ -46,6 +46,7 @@
     };
 
     $scope.staff = angular.copy(staff);
-    
+    $scope.showLucky = false;
+
   }]);
 })();

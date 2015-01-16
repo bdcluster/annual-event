@@ -5,7 +5,7 @@
      $rootScope,   $scope,  AMS,   C){
 
     var storage = C.storage();
-
+    $rootScope.slideIn = false;
     $rootScope.wild = false;
     $rootScope.showBg = false;
 

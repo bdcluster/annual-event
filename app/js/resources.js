@@ -9,7 +9,7 @@
     var evn = 0; 
     // 0: local, 1: dev, 2:test, 3:production
     if(evn === 0){
-      url = 'http://192.168.1.70:8084/:endpoint/:action';
+      url = 'http://10.11.40.5:8084/:endpoint/:action';
       angular.extend(normalPrarms, {local:1, mock:1, enforce:1, chaos:Math.random()});
     }
     if(evn === 1){
