@@ -46,11 +46,12 @@
     
   }])
   .controller('BindController', [
-    '$scope', 'AMS', function(
-     $scope,   AMS){
+    '$scope', '$location', 'AMS', function(
+     $scope,   $location,   AMS){
 
-    $scope.formdata = {show:true};
-    var ctx = document.querySelector('#myCanvas').getContext('2d'),
+    $scope.formdata = {show:true, avatar:''};
+    var canvas = document.querySelector('#myCanvas'),
+        ctx = canvas.getContext('2d'),
         img = document.querySelector('#imgFile');
     ctx.font = '14px/65px Arial';
     ctx.textAlign = 'center';
@@ -77,10 +78,19 @@
                 h1 = w1 * oh / ow;
               }
               ctx.clearRect(0, 0, w, w);
-              ctx.translate(w/2, w/2);
-              // ctx.rotate(-Math.PI/2);
-              ctx.translate(-w/2, -w/2)
               ctx.drawImage(image, 0, 0, w1, h1);
+              angular.extend($scope.formdata, {avatar: canvas.toDataURL('image/png')});
+
+              //rotate image action
+              $scope.rotateImage = function(cw){
+                var clockwise = cw || 1;
+                ctx.clearRect(0, 0, w, w);
+                ctx.translate(w/2, w/2);
+                ctx.rotate(clockwise * Math.PI/2);
+                ctx.translate(-w/2, -w/2)
+                ctx.drawImage(image, 0, 0, w1, h1);
+                angular.extend($scope.formdata, {avatar: canvas.toDataURL('image/png')});
+              }
 
             }
             image.src = img;
@@ -93,6 +103,28 @@
         alert('上传失败！');
       }
     });
+
+    $scope.submitInfo = function(e){
+      console.log(this.formdata.avatar.indexOf('data:image') === 0)
+      if(!e.target.disabled && this.formdata.id > 0 && this.formdata.avatar.indexOf('data:image') === 0){
+        e.target.disabled=true;
+
+        AMS.get({
+          endpoint: 'bind', 
+          id: this.formdata.id,
+          avatar: this.formdata.avatar
+        }, function(req){
+          if(req.success) {
+            alert('上传成功！');
+            $location.path('/home');
+          }
+        });
+      } else {
+        alert('请填写正确的资料');
+        e.target.disabled=false;
+      }
+      // if(this.)
+    };
 
 
     AMS.get({endpoint: 'staff'}, function(req){

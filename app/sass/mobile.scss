@@ -24,6 +24,7 @@ $enable-all-modules:      true;
 $vote-nav-height: 118px * 0.5;
 
 .btn-vote{
+  border: none;
   display: block;
   margin:0 auto;
   padding:0 20px;
@@ -181,3 +182,20 @@ $vote-nav-height: 118px * 0.5;
   }
 }
 
+.rotate-left, .rotate-right{
+  float: left;
+  position: relative;
+  line-height: 80px;
+  margin: 0 8px;
+  color: #aaa;
+}
+
+.rotate-left{
+  @include transform(matrix(-1,0,0,1,0,0));
+}
+
+.btn-bind{
+  margin-top: 20px;
+  width: 140px;
+  background-color: #dc0b1f;
+}

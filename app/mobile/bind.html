@@ -3,11 +3,12 @@
 <form novalidate name="form" class="input-group">
   <div class="input-row bio-row">
     <label>头像</label>
-    <!-- <canvas width="65" height="65"></canvas> -->
+    <span class="icon icon-refresh rotate-left" ng-click="rotateImage(-1)"></span>
     <div class="upload-area">
       <canvas width="65" height="65" id="myCanvas"></canvas>
       <input id="imgFile" type="file" name="file">
     </div>
+    <span class="icon icon-refresh rotate-right" ng-click="rotateImage()"></span>
   </div>
   <div class="input-row">
     <label>姓名</label>
@@ -21,3 +22,4 @@
     </div>
   </div>
 </form>
+<button class="btn-vote btn-bind" ng-click="submitInfo($event);">完成</button>
