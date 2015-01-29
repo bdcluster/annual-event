@@ -13,11 +13,16 @@
 
     $routeProvider
       .when('/home', {
-        templateUrl: viewPath + '/home.html'
+        templateUrl: viewPath + '/home.html',
+        controller: "HomeController"
       })
       .when('/vote', {
         templateUrl: viewPath + '/vote.html',
         controller:  'VoteController'
+      })
+      .when('/voteFinal', {
+        templateUrl: viewPath + '/vote-final.html',
+        controller:  'VoteFinalController'
       })
       .when('/bind', {
         templateUrl: viewPath + '/bind.html',

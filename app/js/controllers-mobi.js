@@ -8,15 +8,33 @@
     $rootScope.title = '中晴集团年会';
    
   }])
+  .controller('HomeController', [
+    '$scope', '$location', 'AMS', function(
+     $scope,   $location,   AMS){
+
+    $scope.goVotePage = function(){
+      AMS.get({endpoint: 'current'}, function(res){
+        var step = res.data;
+        if(step===1){
+          $location.path('/vote');
+        }
+        if(step===2){
+          $location.path('/voteFinal');
+        }
+      });
+    };
+    
+  }])
   .controller('VoteController', [
-    '$rootScope', '$scope', '$location', 'AMS', function(
-     $rootScope,   $scope,   $location,   AMS){
+    '$scope', '$location', 'AMS', function(
+     $scope,   $location,   AMS){
 
     AMS.get({endpoint: 'groups'}, function(res){
       var curAgainst=[], groups = res.data;
       for(var i=0; i<groups.length; i++){
         if(groups[i].status === 'ON'){
           curAgainst = groups[i].programs;
+          $scope.groupId=groups[i].id;
           break;
         }
       }
@@ -36,10 +54,47 @@
     }
 
     $scope.voteIt = function(e){
-      AMS.get({endpoint: 'vote', id: $scope.programId}, function(req){
+      AMS.get({endpoint: 'vote', action:'group',  id: $scope.programId, groupId: $scope.groupId}, function(req){
         if(req.success){
           alert('投票成功！');
           $location.path('#/home');
+        }
+        else {
+          alert(req.message);
+        }
+      });
+    };
+    
+  }])
+  .controller('VoteFinalController', [
+    '$scope', '$location', 'AMS', function(
+     $scope,   $location,   AMS){
+
+    $scope.voteTitle = '8强总决选';
+    $scope.ids = [];
+    AMS.get({endpoint: 'statistic'}, function(res){
+      $scope.programs = res.data.programs;
+    });
+
+    $scope.chooseIt = function(id){
+      var pos = this.ids.indexOf(id);
+      if( pos > -1){
+        this.ids.splice(pos, 1);
+      } else if(this.ids.length < 3){
+        this.ids.push(id);
+      } else {
+        alert('最多只能选3票哦！');
+      }
+      this.ids.length > 0 ? $scope.enableVote = true : $scope.enableVote = false;
+    };
+
+    $scope.voteIt = function(){
+      AMS.get({endpoint: 'vote', action:'program', ids: $scope.ids.join(',')}, function(req){
+        if(req.success){
+          alert('投票成功！');
+          $location.path('#/home');
+        } else {
+          alert(req.message)
         }
       });
     };
@@ -53,16 +108,16 @@
     var canvas = document.querySelector('#myCanvas'),
         ctx = canvas.getContext('2d'),
         img = document.querySelector('#imgFile');
-    ctx.font = '14px/65px Arial';
+    ctx.font = '14px/100px Arial';
     ctx.textAlign = 'center';
     ctx.fillStyle = '#666';
-    ctx.fillText('上传头像', 33, 40);
+    ctx.fillText('上传头像', 50, 50);
 
     angular.element(img).on('change', function(e){
       if (window.File && window.FileReader) {
         var f=e.target.files[0];
         if(f && f.type.match("image.*")){
-          var reader = new FileReader(), w = 65;
+          var reader = new FileReader(), w = 100;
           reader.readAsDataURL(f);
 
           reader.onload = function(evt){
@@ -105,12 +160,10 @@
     });
 
     $scope.submitInfo = function(e){
-      console.log(this.formdata.avatar.indexOf('data:image') === 0)
       if(!e.target.disabled && this.formdata.id > 0 && this.formdata.avatar.indexOf('data:image') === 0){
         e.target.disabled=true;
 
-        AMS.get({
-          endpoint: 'bind', 
+        AMS.reg({
           id: this.formdata.id,
           avatar: this.formdata.avatar
         }, function(req){

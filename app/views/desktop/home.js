@@ -18,7 +18,7 @@
 
       var staff = AMS.get({endpoint: 'staff'}, function(req){
         storage.set('staff', req.data);
-        $location.path('/portal');
+        // $location.path('/portal');
       }, function(){
         console.log('未能获取人员数据！')
       });

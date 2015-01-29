@@ -9,6 +9,7 @@
 
     $rootScope.slideIn = false;
     $rootScope.wild = true;
+    $rootScope.showBg = false;
     
     AMS.get({endpoint: 'groups'}, function(res){
       $scope.group = res.data;
@@ -37,9 +38,12 @@
     };
 
     $scope.goNextVote = function(){
-      AMS.get({endpoint: 'nextVote'}, function(res){
+      AMS.get({endpoint: 'next', action: 'voting'}, function(res){
         if(res.success){
           $location.path('/final');
+        }
+        else{
+          alert('16进8投票还在进行！');
         }
       })
     }
