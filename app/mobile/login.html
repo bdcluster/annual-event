@@ -1,0 +1,10 @@
+<div id="bindTitle"></div>
+<p class="text-tips">输入手机号登录，<br>在歌手大赛中为自己喜欢的好声音投票！</p>
+<p>&nbsp;</p>
+<form novalidate name="form" class="input-group">
+  <div class="input-row">
+    <label>手机</label>
+    <input type="tel" placeholder="请输入您的手机号" name="staffMobile" ng-model="formdata.mobile" ng-pattern="/^0?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" required>
+  </div>
+</form>
+<button class="btn-vote btn-bind" ng-click="submitInfo();" ng-disabled="form.$invalid || form.$pristine">登录</button>

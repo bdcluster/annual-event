@@ -9,8 +9,8 @@
    
   }])
   .controller('HomeController', [
-    '$scope', '$location', 'AMS', function(
-     $scope,   $location,   AMS){
+    '$scope', '$location', 'AMS', 'C',function(
+     $scope,   $location,   AMS,   C){
 
     $scope.goVotePage = function(){
       AMS.get({endpoint: 'current'}, function(res){
@@ -26,9 +26,10 @@
     
   }])
   .controller('VoteController', [
-    '$scope', '$location', 'AMS', function(
-     $scope,   $location,   AMS){
+    '$scope', '$location', 'AMS', 'C', function(
+     $scope,   $location,   AMS,   C){
 
+    var storage = C.storage();
     AMS.get({endpoint: 'groups'}, function(res){
       var curAgainst=[], groups = res.data;
       for(var i=0; i<groups.length; i++){
@@ -54,7 +55,13 @@
     }
 
     $scope.voteIt = function(e){
-      AMS.get({endpoint: 'vote', action:'group',  id: $scope.programId, groupId: $scope.groupId}, function(req){
+      AMS.get({
+        endpoint: 'vote', 
+        action:'group',  
+        id: $scope.programId, 
+        groupId: $scope.groupId,
+        mobile: storage.get('auth')
+      }, function(req){
         if(req.success){
           alert('投票成功！');
           $location.path('#/home');
@@ -67,9 +74,10 @@
     
   }])
   .controller('VoteFinalController', [
-    '$scope', '$location', 'AMS', function(
-     $scope,   $location,   AMS){
+    '$scope', '$location', 'AMS', 'C', function(
+     $scope,   $location,   AMS,   C){
 
+    var storage = C.storage();
     $scope.voteTitle = '8强总决选';
     $scope.ids = [];
     AMS.get({endpoint: 'statistic'}, function(res){
@@ -89,7 +97,12 @@
     };
 
     $scope.voteIt = function(){
-      AMS.get({endpoint: 'vote', action:'program', ids: $scope.ids.join(',')}, function(req){
+      AMS.get({
+        endpoint: 'vote', 
+        action:'program', 
+        ids: $scope.ids.join(','),
+        mobile: storage.get('auth')
+      }, function(req){
         if(req.success){
           alert('投票成功！');
           $location.path('#/home');
@@ -98,20 +111,35 @@
         }
       });
     };
-    
+  }])
+  .controller('LoginController', [
+    '$location', '$scope', 'AMS', 'C', function(
+     $location,   $scope,   AMS,   C){
+
+    $scope.formdata = {};
+    $scope.submitInfo = function(){
+      AMS.login({mobile: $scope.formdata.mobile}, function(req){
+        if(req.success){
+          C.storage().set('auth', $scope.formdata.mobile);
+          $location.path('/home');
+        }
+      });
+    };
   }])
   .controller('BindController', [
-    '$scope', '$location', 'AMS', function(
-     $scope,   $location,   AMS){
+    '$scope', '$location', 'AMS', 'C', function(
+     $scope,   $location,   AMS,   C){
 
-    $scope.formdata = {show:true, avatar:''};
+    $scope.formdata = {avatar:''};
+
+    var storage = C.storage();
     var canvas = document.querySelector('#myCanvas'),
         ctx = canvas.getContext('2d'),
         img = document.querySelector('#imgFile');
     ctx.font = '14px/100px Arial';
     ctx.textAlign = 'center';
     ctx.fillStyle = '#666';
-    ctx.fillText('上传头像', 50, 50);
+    ctx.fillText('上传头像', 50, 55);
 
     angular.element(img).on('change', function(e){
       if (window.File && window.FileReader) {
@@ -160,28 +188,29 @@
     });
 
     $scope.submitInfo = function(e){
-      if(!e.target.disabled && this.formdata.id > 0 && this.formdata.avatar.indexOf('data:image') === 0){
-        e.target.disabled=true;
-
-        AMS.reg({
-          id: this.formdata.id,
-          avatar: this.formdata.avatar
-        }, function(req){
-          if(req.success) {
-            alert('上传成功！');
-            $location.path('/home');
-          }
-        });
-      } else {
-        alert('请填写正确的资料');
-        e.target.disabled=false;
-      }
-      // if(this.)
+      AMS.register({
+        id: this.formdata.id,
+        mobile: this.formdata.mobile,
+        avatar: this.formdata.avatar
+      }, function(req){
+        if(req.success) {
+          storage.set('auth', $scope.formdata.mobile);
+          alert('上传成功！');
+          $location.path('/home');
+        } else {
+          alert(req.message);
+        }
+      });
     };
 
 
     AMS.get({endpoint: 'staff'}, function(req){
-      $scope.staff = req.data;
+      var pos = [], d = req.data;
+      for(var i=0, x=d.length; i<x; i++){
+        if(pos.indexOf(d[i].company)===-1) pos.push(d[i].company);
+      }
+      $scope.position = pos;
+      $scope.staff = d;
     }, function(){
       console.log('未能获取人员数据！')
     });

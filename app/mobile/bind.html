@@ -1,25 +1,30 @@
 <div id="bindTitle"></div>
 <p class="text-tips">完成注册，即可参加年会抽奖活动<br>并在歌手大赛中为自己喜欢的好声音投票！</p>
+<p class="text-right">
+  <a href="#/login">我已注册</a>
+</p>
 <form novalidate name="form" class="input-group">
   <div class="input-row bio-row">
     <label>头像</label>
-    <span class="icon icon-refresh rotate-left" ng-click="rotateImage(-1)"></span>
     <div class="upload-area">
       <canvas width="100" height="100" id="myCanvas"></canvas>
       <input id="imgFile" type="file" name="file">
     </div>
+    <span class="icon icon-refresh rotate-left" ng-click="rotateImage(-1)"></span>
     <span class="icon icon-refresh rotate-right" ng-click="rotateImage()"></span>
   </div>
   <div class="input-row">
     <label>姓名</label>
-    <input type="text" name="staffName" placeholder="请输入关键词后选择" ng-model="formdata.info" ng-keyup="formdata.show=true">
-    <div class="staff-list card" ng-show="form.staffName.$dirty &amp;&amp; formdata.info!='' &amp;&amp; formdata.show">
-      <ul class="table-view">
-        <li class="table-view-cell" ng-repeat="s in staff | filter: formdata.info" ng-click="formdata.info=s.name; formdata.id=s.id; formdata.show=false">
-          {{s.name}} - {{s.position}}
-        </li>
-      </ul>
-    </div>
+    <select name="position" class="form-sel" ng-model="pos" ng-options="pos for pos in position">
+      <option value="">==部门==</option>
+    </select>
+    <select name="position" class="form-sel" ng-model="stf" ng-options=" s.name for s in staff | filter: {company: pos || null}" ng-change="formdata.id=stf.id">
+      <option value="">==姓名==</option>
+    </select>
+  </div>
+  <div class="input-row">
+    <label>手机</label>
+    <input type="tel" placeholder="请输入您的手机号" name="staffMobile" ng-model="formdata.mobile" ng-pattern="/^0?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" required>
   </div>
 </form>
-<button class="btn-vote btn-bind" ng-click="submitInfo($event);">完成</button>
+<button class="btn-vote btn-bind" ng-click="submitInfo($event);" ng-disabled="form.$invalid || form.$pristine">完成</button>

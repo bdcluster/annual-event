@@ -5,28 +5,47 @@
     'ngRoute',
     'ngTouch',
     'ngResource',
+    'LocalStorageModule',
     'AmsServices',
     'AmsResources',
     'AmsMobiControllers'
   ])
+  .run(['$rootScope', '$location', 'C', function($rootScope, $location, C) {
+    $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
+      var isLogged, storage = C.storage();
+      (storage.get('auth') !== null && storage.get('auth').length === 11) ? isLogged = true : isLogged = false;
+      if (nextRoute.access && nextRoute.access.requiredLogin && !isLogged) {
+        $location.path('/bind');
+      }
+    });
+  }])
   .config(['$routeProvider','$httpProvider', function($routeProvider, $httpProvider){
 
     $routeProvider
       .when('/home', {
         templateUrl: viewPath + '/home.html',
-        controller: "HomeController"
+        controller: "HomeController",
+        access: { requiredLogin: true }
       })
       .when('/vote', {
         templateUrl: viewPath + '/vote.html',
-        controller:  'VoteController'
+        controller:  'VoteController',
+        access: { requiredLogin: true }
       })
       .when('/voteFinal', {
         templateUrl: viewPath + '/vote-final.html',
-        controller:  'VoteFinalController'
+        controller:  'VoteFinalController',
+        access: { requiredLogin: true }
       })
       .when('/bind', {
         templateUrl: viewPath + '/bind.html',
-        controller:  'BindController'
+        controller:  'BindController',
+        access: { requiredLogin: false }
+      })
+      .when('/login', {
+        templateUrl: viewPath + '/login.html',
+        controller:  'LoginController',
+        access: { requiredLogin: false }
       })
       .otherwise({redirectTo: '/home'});
 

@@ -171,7 +171,12 @@ body{
 .text-tips{
   text-align:center;
   font-weight: bold;
-  padding: 25px 0;
+  padding: 25px 0 5px;
+}
+
+.text-right{
+  padding-right: 10px;
+  text-align: right;
 }
 
 .bio-row{
@@ -188,8 +193,9 @@ body{
     width: $cell; height: $cell;
     margin: 8px 0;
     background: #ccc;
+      @include border-radius(3px);
     canvas{
-      
+      @include border-radius(3px);
     }
     input{
       width: $cell; height: $cell;
@@ -201,27 +207,31 @@ body{
     }
   }
 }
-.staff-list {
-  @include border-radius(0);
-  position: absolute;
-  top: 307px; width: 65%; right:0;
-  height:150px; overflow: auto;
-  .table-view-cell{
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
+
+.form-sel{
+  width: 30%; height: 35px;
+  float: left;
+  margin-right: 2%;
+}
+
+.input-row{
+  border: none;
 }
 
 .rotate-left, .rotate-right{
   float: left;
-  position: relative;
-  line-height: 116px;
+  line-height: (116px/2);
   margin: 0 8px;
   color: #aaa;
 }
 
 .rotate-left{
   @include transform(matrix(-1,0,0,1,0,0));
+  margin-top: (116px/2);
+}
+
+.rotate-right{
+  margin-left: -30px;
 }
 
 .btn-bind{
