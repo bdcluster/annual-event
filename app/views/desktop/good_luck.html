@@ -1,10 +1,11 @@
 <ul id="luckList" class="list-inline">
-  <li ng-repeat="s in staff" ng-bind="s.name" data-id="{{s.id}}" data-index="{{$index}}"></li>
+  <li ng-repeat="s in staff" data-id="{{s.id}}" data-index="{{$index}}" style="background-image:url({{imgroot+s.avatar}})">
+    <span ng-bind="s.name" ng-hide="s.avatar"></span>
+  </li>
 </ul>
 <div class="lucky-man" ng-show="showLucky">
-  <img ng-src="{{luckyMan.img}}" alt="{{luckyMan.name}}">
+  <img ng-src="{{luckyMan.img || './img/default-lucky.gif'}}" alt="{{luckyMan.name}}" width="400" height="400">
   <img src="../img/crown.png" alt="crown" class="crown animated bounce-in">
-  <p ng-bind="luckyMan.position"></p>
   <p ng-bind="luckyMan.name"></p>
   <button class="btn btn-link pull-left" ng-click="cancelLucky(); showLucky=false">取消</button>
   <button class="btn btn-danger" ng-click="getLuck(); slideIn=false" ng-disabled="disableLottery">下一个</button>

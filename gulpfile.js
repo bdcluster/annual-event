@@ -94,7 +94,7 @@
   //| ✓ join & minify css & js
   //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   gulp.task('html', ['sass'], function() {
-    return gulp.src('app/index.html')
+    return gulp.src(['app/desktop.html', 'app/mobile.html'])
       .pipe($.plumber())
       .pipe($.useref.assets())
       .pipe($.if('*.js', $.uglify()))
@@ -111,7 +111,7 @@
   //| ✓ concat & minify all template to a js file
   //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   gulp.task('tmpl2js', function() {
-    return gulp.src([_.view + '/desktop/**/*.html'])
+    return gulp.src([_.view + '/desktop/**/*.html', _.app + '/mobile/**/*.html'])
       .pipe($.plumber())
       .pipe($.minifyHtml({
         empty: true,
@@ -199,7 +199,7 @@
 
     // Watch template files
     $.watch({
-      glob: [_.view + '/desktop/**/*.html']
+      glob: [_.view + '/desktop/**/*.html', _.app + '/mobile/**/*.html']
     }, function() {
       gulp.start('tmpl2js');
     });
@@ -210,7 +210,7 @@
   //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   gulp.task('clean', function() {
     return $.del([_.dist + '*'], function(err) {
-      console.log('Files deleted');
+      // console.log('Files deleted');
     });
   });
 
@@ -225,7 +225,7 @@
   //| ✓ alias
   //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   gulp.task('test', ['jsonlint', 'jshint']);
-  gulp.task('build', ['test', 'clean', 'html', 'tmpl2js', 'images', 'svg', 'copy']);
+  gulp.task('build', ['test', 'clean', 'html', 'images', 'svg', 'copy']);
 
   //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   //| ✓ default

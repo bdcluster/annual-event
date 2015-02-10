@@ -54,10 +54,16 @@ body{
   margin-top: 30px;
 }
 
+#luckList{
+  margin: 0 auto;
+}
+
 #luckList li{
   @include transition(all .25s ease);
-
+  margin-bottom: -5px;
   width: $d; height: $d;
+  background-size: $d $d;
+  overflow: hidden;
   background-color: $gray-lighter;
   font-size:0.5em;
   text-align:center;
@@ -81,7 +87,7 @@ body{
     margin-bottom: 20px;
   }
   p{
-    font-size: 1.5em;
+    font-size: 2.5em;
     line-height: 26px;
   }
   button.btn-danger{
@@ -180,6 +186,26 @@ aside{
         text-decoration: none;
       }
     }
+  }
+}
+
+.black-wrap{
+  padding: 0 50px;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow: auto;
+  background: #ddd;
+}
+
+.table-block{
+  width: 150px; 
+  float: left;
+  margin: 20px;
+  .s-list {
+    height: 450px;
+    overflow: auto;
   }
 }
 

@@ -12,7 +12,7 @@
     AMS.get({endpoint: 'lottery'}, function(req){
       $scope.lotteryInfo = req.data;
     }, function(){
-      console.log('未能取得奖项数据！')
+      console.log('未能取得奖项数据！');
     });
 
     $scope.currentLevel=function(id, level){

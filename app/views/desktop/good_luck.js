@@ -16,10 +16,10 @@
       var self = this, luckyIndex;
       self.disableLottery = true;
       $scope.showLucky = false;
-      //angular.element(document.querySelectorAll('.lucky-man')).removeClass('lucky-man');
       AMS.get({endpoint: 'lucky', id: curLottery.id}, function(res){
         if(res.success){
-          luckyIndex = document.querySelector('[data-id="'+res.data.id+'"]').dataset['index'] - 0;
+          var luckyDom = document.querySelector('[data-id="'+res.data.id+'"]');
+          luckyIndex = luckyDom.dataset.index - 0;
           
           $rootScope.cancelLucky=function(){
             AMS.get({endpoint: 'luckless', id:res.data.id}, function(){
@@ -29,7 +29,7 @@
 
           $interval(function(){
             index = Math.ceil(Math.random() * staff.length) -1;
-            angular.element(document.getElementById('luckList')).children().eq(index).addClass('zoomIn')
+            angular.element(document.getElementById('luckList')).children().eq(index).addClass('zoomIn');
           }, 100, 50).then(function(){
             angular.element(document.querySelectorAll('.zoomIn')).removeClass('zoomIn');
             $scope.luckyMan = $scope.staff[luckyIndex];
@@ -38,7 +38,7 @@
             self.disableLottery = false;
           });
         } else {
-          alert(res.code);
+          alert(res.message);
           self.disableLottery = false;
         }
       });

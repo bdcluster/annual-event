@@ -9,7 +9,6 @@
     'AmsDirectives',
     'AmsResources',
     'AmsServices',
-    'AmsTemplate',
     'AmsFilters'
   ])
   .config(['$routeProvider','$httpProvider', 'localStorageServiceProvider', function($routeProvider, $httpProvider, localStorageServiceProvider){
@@ -42,6 +41,10 @@
       .when('/final', {
         templateUrl: viewPath + '/desktop/final.html',
         controller:  'FinalController'
+      })
+      .when('/black', {
+        templateUrl: viewPath + '/desktop/blacklist.html',
+        controller:  'BlackListController'
       })
       .otherwise({redirectTo: '/home'});
 

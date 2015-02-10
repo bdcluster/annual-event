@@ -16,15 +16,15 @@
   <div class="input-row">
     <label>姓名</label>
     <select name="position" class="form-sel" ng-model="pos" ng-options="pos for pos in position">
-      <option value="">==部门==</option>
+      <option value="">==桌号==</option>
     </select>
-    <select name="position" class="form-sel" ng-model="stf" ng-options=" s.name for s in staff | filter: {company: pos || null}" ng-change="formdata.id=stf.id">
+    <select name="position" class="form-sel" ng-model="stf" ng-options="s.name for s in staff | filter: {company: pos || null}" ng-change="formdata.id=stf.id">
       <option value="">==姓名==</option>
     </select>
   </div>
   <div class="input-row">
     <label>手机</label>
-    <input type="tel" placeholder="请输入您的手机号" name="staffMobile" ng-model="formdata.mobile" ng-pattern="/^0?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" required>
+    <input type="tel" placeholder="抽奖用，请准确填写" name="staffMobile" ng-model="formdata.mobile" ng-pattern="/^0?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" required>
   </div>
 </form>
 <button class="btn-vote btn-bind" ng-click="submitInfo($event);" ng-disabled="form.$invalid || form.$pristine">完成</button>

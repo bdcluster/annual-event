@@ -1,11 +1,13 @@
 (function(){
   'use strict';
   angular.module('AmsControllers', [
-    'HomeModule', 'PortalModule', 'LotteryModule', 'GoodLuckModule', 'AwardsModule', 'GroupModule', "FinalModule"
+    'HomeModule', 'PortalModule', 'LotteryModule', 'GoodLuckModule', 'AwardsModule', 'GroupModule', "FinalModule", "BlackListModule"
   ])
   .controller('GlobelController', [
     '$rootScope','$window','$location','AMS','C',function(
      $rootScope,  $window,  $location,  AMS,  C){
+
+    $rootScope.imgroot = 'http://10.11.40.168:8080/activity';
 
     $rootScope.wild = true;
     $rootScope.slideIn = false;
@@ -14,7 +16,7 @@
       {name: '投票', path: 'group'},
       {name: '抽奖', path: 'lottery'},
       {name: '中奖结果', path: 'awards'}
-    ]
+    ];
     $rootScope.isActivedMenu = function(viewLocation){
       return viewLocation === $location.path();
     };

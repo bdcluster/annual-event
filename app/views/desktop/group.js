@@ -31,7 +31,7 @@
             $scope.group = res.data;
           }
           else{
-            alert(res.message)
+            alert(res.message);
           }
         });
       }
@@ -45,8 +45,8 @@
         else{
           alert('16进8投票还在进行！');
         }
-      })
-    }
+      });
+    };
 
   }]);
 })();

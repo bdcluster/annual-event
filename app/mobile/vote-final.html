@@ -4,7 +4,7 @@
 </header>
 <div class="content vote-content">
   
-  <div class="program program-small animated" ng-repeat="a in programs" style="background-image:url({{a.img}})" ng-click="chooseIt(a.id)" ng-class="{'vote-it':ids.indexOf(a.id) > -1, 'bounce-in-left': $index % 2 == 0, 'bounce-in-right': $index % 2 !=0}">
+  <div class="program program-small animated" ng-repeat="a in programs" style="background-image:url({{imgroot + a.img}})" ng-click="chooseIt(a.id)" ng-class="{'vote-it':ids.indexOf(a.id) > -1, 'bounce-in-left': $index % 2 == 0, 'bounce-in-right': $index % 2 !=0}">
     <p ng-bind="a.name"></p>
   </div>
   <a href="#" class="btn-vote program-vote" ng-show="enableVote" ng-class="{disabled:ids==0}" ng-click="voteIt()">就投它了</a>

@@ -6,6 +6,7 @@
      $rootScope){
 
     $rootScope.title = '中晴集团年会';
+    $rootScope.imgroot = 'http://10.11.40.168:8080/activity';
    
   }])
   .controller('HomeController', [
@@ -52,7 +53,7 @@
     $scope.chooseIt = function(id){
       $scope.programId = id;
       $scope.enableVote = true;
-    }
+    };
 
     $scope.voteIt = function(e){
       AMS.get({
@@ -78,7 +79,7 @@
      $scope,   $location,   AMS,   C){
 
     var storage = C.storage();
-    $scope.voteTitle = '8强总决选';
+    $scope.voteTitle = '8强总决选（最多选3票）';
     $scope.ids = [];
     AMS.get({endpoint: 'statistic'}, function(res){
       $scope.programs = res.data.programs;
@@ -107,7 +108,7 @@
           alert('投票成功！');
           $location.path('#/home');
         } else {
-          alert(req.message)
+          alert(req.message);
         }
       });
     };
@@ -122,6 +123,9 @@
         if(req.success){
           C.storage().set('auth', $scope.formdata.mobile);
           $location.path('/home');
+        } else {
+          alert(req.message);
+          $location.path('/bind');
         }
       });
     };
@@ -170,15 +174,13 @@
                 ctx.clearRect(0, 0, w, w);
                 ctx.translate(w/2, w/2);
                 ctx.rotate(clockwise * Math.PI/2);
-                ctx.translate(-w/2, -w/2)
+                ctx.translate(-w/2, -w/2);
                 ctx.drawImage(image, 0, 0, w1, h1);
                 angular.extend($scope.formdata, {avatar: canvas.toDataURL('image/png')});
-              }
-
-            }
+              };
+            };
             image.src = img;
-
-          }
+          };
         } else {
           alert('只能上传图片！');
         }
@@ -207,12 +209,15 @@
     AMS.get({endpoint: 'staff'}, function(req){
       var pos = [], d = req.data;
       for(var i=0, x=d.length; i<x; i++){
-        if(pos.indexOf(d[i].company)===-1) pos.push(d[i].company);
+        if(d[i].company !== '主桌'){
+          d[i].company = '第'+d[i].company+'桌';
+        }
+        if(pos.indexOf(d[i].company) === -1) pos.push(d[i].company);
       }
       $scope.position = pos;
       $scope.staff = d;
     }, function(){
-      console.log('未能获取人员数据！')
+      console.log('未能获取人员数据！');
     });
     
   }]);
