@@ -1,12 +1,12 @@
 <div class="black-wrap" ng-click="setToggle($event)">
   <h1 class="text-center">黑名单设置</h1>
-  <fieldset class="table-block" ng-repeat="p in position | orderBy: p">
-    <legend>第 <span class="badge" ng-bind="p"></span> 桌</legend>
+  <fieldset class="table-block" ng-repeat="p in position">
+    <legend ng-bind="p"></legend>
     <div class="s-list">
       <button class="btn btn-block" data-uniq="{{s.id}}" data-index="{{$index}}"
             ng-repeat="s in staff | filter: {company: p || null}" 
             ng-bind="s.name"
-            ng-class="{'btn-info':s.valid}"></button>
+            ng-class="{'btn-info':!s.disable}"></button>
     </div>
   </fieldset>
 </div>

@@ -6,14 +6,21 @@
   <div class="col-xs-6 col-xs-offset-3 group" ng-repeat="g in group" ng-click="setActive($index)" ng-class="{active:getActive($index)}">
     <div class="panel" ng-class="{'panel-primary': g.status=='ON', 'panel-default': g.status=='OFF'}">
       <div class="panel-heading">
-        <span ng-bind="g.name"></span>: 
-        <span ng-bind="g.programs[0].name"></span> VS. <span ng-bind="g.programs[1].name"></span>
-        <span class="pull-right" ng-show="g.status=='ON'">投票中...</span>
+        <h3>
+          <span ng-bind="g.name"></span>
+          <small class="pull-right" ng-show="g.status=='ON'">投票中...</small>
+        </h3>
       </div>
       <div class="panel-body">
         <div class="row">
           <div class="col-xs-4">
-            <img ng-src="{{imgroot + g.programs[0].img || 'http://dummyimage.com/150x150'}}" class="img-circle" width="150" height="150">
+            <img ng-src="{{g.programs[1].img ? imgroot + g.programs[0].img : 'http://dummyimage.com/150x150'}}" class="img-circle" width="150" height="150">
+            <p class="text-center">
+              {{g.programs[0].name}}
+              <strong ng-show="g.status=='OFF' &amp;&amp; g.programs[0].count + g.programs[1].count > 0" class="text-primary"> 
+                {{ g.programs[0].count*100/(g.programs[0].count + g.programs[1].count) | number: 2 }}%
+              </strong>
+            </p>
           </div>
           <div class="col-xs-4">
             <p>&nbsp;</p>
@@ -26,7 +33,13 @@
             </p>
           </div>
           <div class="col-xs-4">
-            <img ng-src="{{imgroot + g.programs[1].img || 'http://dummyimage.com/150x150'}}" class="img-circle" width="150" height="150">
+            <img ng-src="{{g.programs[1].img ? imgroot + g.programs[1].img : 'http://dummyimage.com/150x150'}}" class="img-circle" width="150" height="150">
+            <p class="text-center">
+              {{g.programs[1].name}}
+              <strong ng-show="g.status=='OFF' &amp;&amp; g.programs[0].count + g.programs[1].count > 0" class="text-primary"> 
+                {{ g.programs[1].count*100/(g.programs[0].count + g.programs[1].count) | number: 2 }}%
+              </strong>
+            </p>
           </div>
         </div>
       </div>

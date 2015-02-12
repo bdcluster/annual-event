@@ -7,26 +7,27 @@
     var storage = C.storage(), s;
 
     $rootScope.showBg = true;
-    $scope.eventInit = function(){
-      storage.clear();
 
-      var start = AMS.get({endpoint: 'start', start: 1}, function(req){
-        s = req.success;
+    $scope.dataInit = function(){
+      AMS.get({endpoint: 'start', start: 1}, function(req){
+        if(req.success) {
+          $scope.initStr = '初始化成功！';
+        } else {
+          alert(req.message);
+        }
       }, function(){
-        console.log('未能取得奖项数据！');
+        var errStr = '初始化不成功！';
+        alert(errStr);
+        console.log(errStr);
       });
+    };
 
-      var staff = AMS.get({endpoint: 'staff'}, function(req){
+    $scope.eventInit = function(){
+      AMS.get({endpoint: 'staff'}, function(req){
         storage.set('staff', req.data);
-        // $location.path('/portal');
+        $location.path('/portal');
       }, function(){
         console.log('未能获取人员数据！');
-      });
-
-      $q.all([start.$promise, staff.$promise]).then(function(){
-        if(s === true){
-          $location.path('/portal');
-        } 
       });
     };  
   }]);

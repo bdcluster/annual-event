@@ -6,7 +6,8 @@
      $rootScope){
 
     $rootScope.title = '中晴集团年会';
-    $rootScope.imgroot = 'http://10.11.40.168:8080/activity';
+    // $rootScope.imgroot = 'http://10.11.40.168:8080/activity';
+    $rootScope.imgroot = 'http://222.73.113.13';
    
   }])
   .controller('HomeController', [
@@ -65,11 +66,14 @@
       }, function(req){
         if(req.success){
           alert('投票成功！');
-          $location.path('#/home');
+          $location.path('/home');
         }
         else {
           alert(req.message);
         }
+      }, function(){
+        alert('可能需要重新绑定手机号！');
+        $location.path('/bind');
       });
     };
     
@@ -106,10 +110,13 @@
       }, function(req){
         if(req.success){
           alert('投票成功！');
-          $location.path('#/home');
+          $location.path('/home');
         } else {
           alert(req.message);
         }
+      }, function(){
+        alert('可能需要重新绑定手机号！');
+        $location.path('/bind');
       });
     };
   }])

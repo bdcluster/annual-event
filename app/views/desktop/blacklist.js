@@ -11,7 +11,10 @@
     AMS.get({endpoint: 'staff'}, function(req){
       var pos = [], d = req.data;
       for(var i=0, x=d.length; i<x; i++){
-        if(pos.indexOf(d[i].company)===-1) pos.push(d[i].company);
+        if(d[i].company !== '主桌'){
+          d[i].company = '第'+d[i].company+'桌';
+        }
+        if(pos.indexOf(d[i].company) === -1) pos.push(d[i].company);
       }
       $scope.position = pos;
       $scope.staff = d;
@@ -24,12 +27,11 @@
       var id = o.dataset.uniq - 0;
 
       if(o.classList.contains('btn')){
-        AMS.get({endpoint: 'toggle', id: id}, function(req){
+        AMS.get({endpoint: 'toggle', action:'black', id: id}, function(req){
           if(req.success){
             for(var i=0, x=$scope.staff.length; i<x; i++){
               if($scope.staff[i].id === id){
-                $scope.staff[i].valid = !$scope.staff[i].valid;
-                console.log($scope.staff[i].valid)
+                $scope.staff[i].disable = !$scope.staff[i].disable;
                 break;
               }
             }
@@ -38,7 +40,6 @@
           console.log('someting wrong!');
         });
       }
-      
     };
 
   }]);

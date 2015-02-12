@@ -1,13 +1,14 @@
 (function(){
   'use strict';
   angular.module('AmsControllers', [
-    'HomeModule', 'PortalModule', 'LotteryModule', 'GoodLuckModule', 'AwardsModule', 'GroupModule', "FinalModule", "BlackListModule"
+    'HomeModule', 'PortalModule', 'LotteryModule', 'GoodLuckModule', 'AwardsModule', 'GroupModule', "FinalModule", "BlackListModule", 'AuthModule'
   ])
   .controller('GlobelController', [
     '$rootScope','$window','$location','AMS','C',function(
      $rootScope,  $window,  $location,  AMS,  C){
 
-    $rootScope.imgroot = 'http://10.11.40.168:8080/activity';
+    // $rootScope.imgroot = 'http://10.11.40.168:8080/activity';
+    $rootScope.imgroot = 'http://222.73.113.13';
 
     $rootScope.wild = true;
     $rootScope.slideIn = false;

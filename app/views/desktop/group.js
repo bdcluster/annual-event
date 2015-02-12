@@ -1,8 +1,8 @@
 (function(){
   'use strict';
   angular.module('GroupModule', []).controller('GroupController', [
-    '$rootScope', '$scope', '$location', 'AMS', 'C', function(
-     $rootScope,   $scope,   $location,   AMS,   C){
+    '$rootScope', '$scope', '$location', '$timeout', 'AMS', 'C', function(
+     $rootScope,   $scope,   $location,   $timeout,   AMS,   C){
 
     var storage = C.storage();
     storage.remove('index');
@@ -29,6 +29,11 @@
         AMS.get({endpoint: 'groups', id: id, status: s}, function(res){
           if(res.success){
             $scope.group = res.data;
+            // var viewPanel = document.querySelector('.group:nth-child(7)');
+            // console.log(storage.get('index'));
+            $timeout(function(){
+              document.querySelector('.group:nth-child(' + (storage.get('index') + 1) + ')').scrollIntoView();
+            },100);
           }
           else{
             alert(res.message);
